@@ -2,7 +2,7 @@ package provider
 
 import (
 	"fmt"
-	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"testing"
 )
 
@@ -13,7 +13,7 @@ func TestAccZeaburProjectResource(t *testing.T) {
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
-				Config: testAccZeaburProjectResourceConfig("test", "hkg1"),
+				Config: providerConfig + testAccZeaburProjectResourceConfig("test", "hkg1"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("zeabur_project.test", "name", "test"),
 					resource.TestCheckResourceAttr("zeabur_project.test", "region", "hkg1"),
@@ -28,7 +28,7 @@ func TestAccZeaburProjectResource(t *testing.T) {
 				// example code does not have an actual upstream service.
 				// Once the Read method is able to refresh information from
 				// the upstream service, this can be removed.
-				ImportStateVerifyIgnore: []string{"configurable_attribute", "defaulted"},
+				ImportStateVerifyIgnore: []string{"region", "last_updated"},
 			},
 			// Update and Read testing
 			//{

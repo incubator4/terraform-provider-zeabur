@@ -5,6 +5,7 @@ package provider
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/incubator4/terraform-provider-zeabur/internal/api"
 	"os"
 
@@ -81,6 +82,7 @@ func (p *ZeaburProvider) Configure(ctx context.Context, req provider.ConfigureRe
 	// if data.Endpoint.IsNull() { /* ... */ }
 
 	// Example client configuration for data sources and resources
+	tflog.Info(ctx, "Configuring Zeabur client")
 	client := api.NewClient(apiToken)
 	resp.DataSourceData = client
 	resp.ResourceData = client

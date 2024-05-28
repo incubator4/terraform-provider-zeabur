@@ -4,9 +4,8 @@
 package provider
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"testing"
-
-	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 )
 
 func TestAccZeaburProjectDataSource(t *testing.T) {
@@ -16,9 +15,9 @@ func TestAccZeaburProjectDataSource(t *testing.T) {
 		Steps: []resource.TestStep{
 			// Read testing
 			{
-				Config: testAccZeaburProjectDataSourceConfig,
+				Config: providerConfig + testAccZeaburProjectDataSourceConfig,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("data.zeabur_project.example", "id", "abc12345"),
+					resource.TestCheckResourceAttr("data.zeabur_project.example", "name", "wattely"),
 				),
 			},
 		},
@@ -27,6 +26,6 @@ func TestAccZeaburProjectDataSource(t *testing.T) {
 
 const testAccZeaburProjectDataSourceConfig = `
 data "zeabur_project" "example" {
-  id = "abc12345"
+  id = "66549e889348c9bd9d2821a1"
 }
 `
