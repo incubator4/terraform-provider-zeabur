@@ -62,6 +62,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       fail-fast: false
+      max-parallel: 2
       matrix:
         # list whatever Terraform versions here you would like to support
         terraform:
@@ -84,5 +85,10 @@ jobs:
       - env:
           TF_ACC: "1"
           ZEABUR_API_TOKEN: ${{ secrets.ZEABUR_API_TOKEN }}
-        run: go test -v -cover ./internal/provider/
-        timeout-minutes: 10
+        # retry 3 times if the test fails
+        uses: nick-fields/retry@v3
+        with:
+          max_attempts: 3
+          timeout_minutes: 10
+          command: go test -v -cover ./internal/provider/
+
