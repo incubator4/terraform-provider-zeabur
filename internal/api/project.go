@@ -37,7 +37,7 @@ func (c *Client) GetProject(ctx context.Context, projectID string) (*model.Proje
 	return &query.Project, nil
 }
 
-// Delete a project with the given id
+// DeleteProject deletes a project by its ID.
 func (c *Client) DeleteProject(ctx context.Context, id string) error {
 	var mutation struct {
 		DeleteProject bool `graphql:"deleteProject(_id: $id)"`
