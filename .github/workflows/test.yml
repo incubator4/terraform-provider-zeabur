@@ -83,5 +83,6 @@ jobs:
       - run: go mod download
       - env:
           TF_ACC: "1"
+          ZEABUR_API_TOKEN: ${{ secrets.ZEABUR_API_TOKEN }}
         run: go test -v -cover ./internal/provider/
         timeout-minutes: 10
