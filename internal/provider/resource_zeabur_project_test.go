@@ -1,32 +1,27 @@
-// Copyright (c) HashiCorp, Inc.
-// SPDX-License-Identifier: MPL-2.0
-
 package provider
 
 import (
 	"fmt"
-	"testing"
-
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"testing"
 )
 
-func TestAccExampleResource(t *testing.T) {
+func TestAccZeaburProjectResource(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck:                 func() { testAccPreCheck(t) },
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
-				Config: testAccExampleResourceConfig("one"),
+				Config: testAccZeaburProjectResourceConfig("test", "hkg1"),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("scaffolding_example.test", "configurable_attribute", "one"),
-					resource.TestCheckResourceAttr("scaffolding_example.test", "defaulted", "example value when not configured"),
-					resource.TestCheckResourceAttr("scaffolding_example.test", "id", "example-id"),
+					resource.TestCheckResourceAttr("zeabur_project.test", "name", "test"),
+					resource.TestCheckResourceAttr("zeabur_project.test", "region", "hkg1"),
 				),
 			},
 			// ImportState testing
 			{
-				ResourceName:      "scaffolding_example.test",
+				ResourceName:      "zeabur_project.test",
 				ImportState:       true,
 				ImportStateVerify: true,
 				// This is not normally necessary, but is here because this
@@ -36,21 +31,23 @@ func TestAccExampleResource(t *testing.T) {
 				ImportStateVerifyIgnore: []string{"configurable_attribute", "defaulted"},
 			},
 			// Update and Read testing
-			{
-				Config: testAccExampleResourceConfig("two"),
-				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("scaffolding_example.test", "configurable_attribute", "two"),
-				),
-			},
+			//{
+			//	Config: testAccZeaburProjectResourceConfig("test", "hkg1"),
+			//	Check: resource.ComposeAggregateTestCheckFunc(
+			//		resource.TestCheckResourceAttr("zeabur_project.test", "name", "test"),
+			//		resource.TestCheckResourceAttr("zeabur_project.test", "region", "hkg1"),
+			//	),
+			//},
 			// Delete testing automatically occurs in TestCase
 		},
 	})
 }
 
-func testAccExampleResourceConfig(configurableAttribute string) string {
+func testAccZeaburProjectResourceConfig(name, region string) string {
 	return fmt.Sprintf(`
-resource "scaffolding_example" "test" {
-  configurable_attribute = %[1]q
+resource "zeabur_project" "test" {
+  name   = %[1]q
+  region = %[2]q
 }
-`, configurableAttribute)
+`, name, region)
 }

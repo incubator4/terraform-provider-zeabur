@@ -1,3 +1,4 @@
-provider "scaffolding" {
-  # example configuration here
+provider "zeabur" {
+  # Configuration options
+  api_token = "<api-token>"
 }

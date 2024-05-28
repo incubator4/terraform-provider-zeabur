@@ -88,21 +88,18 @@ func (p *ZeaburProvider) Configure(ctx context.Context, req provider.ConfigureRe
 
 func (p *ZeaburProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
-		NewExampleResource,
 		NewZeaburProjectResource,
 	}
 }
 
 func (p *ZeaburProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
-		NewExampleDataSource,
+		NewZeaburProjectDataSource,
 	}
 }
 
 func (p *ZeaburProvider) Functions(ctx context.Context) []func() function.Function {
-	return []func() function.Function{
-		NewExampleFunction,
-	}
+	return []func() function.Function{}
 }
 
 func New(version string) func() provider.Provider {
