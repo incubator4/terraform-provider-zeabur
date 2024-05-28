@@ -47,8 +47,8 @@ func (p *ZeaburProvider) Schema(ctx context.Context, req provider.SchemaRequest,
 				Optional:            true,
 			},
 			"api_token": schema.StringAttribute{
-				Required:            true,
 				MarkdownDescription: "API token for the provider",
+				Optional:            true,
 			},
 		},
 	}
