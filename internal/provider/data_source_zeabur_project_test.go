@@ -17,7 +17,7 @@ func TestAccZeaburProjectDataSource(t *testing.T) {
 			{
 				Config: providerConfig + testAccZeaburProjectDataSourceConfig,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("data.zeabur_project.example", "name", "wattely"),
+					resource.TestCheckResourceAttr("data.zeabur_project.example", "id", "664f04182a7346a67af9c069"),
 				),
 			},
 		},
@@ -26,6 +26,7 @@ func TestAccZeaburProjectDataSource(t *testing.T) {
 
 const testAccZeaburProjectDataSourceConfig = `
 data "zeabur_project" "example" {
-  id = "66549e889348c9bd9d2821a1"
+  owner = "incubator4"
+  name  = "togitic"
 }
 `
