@@ -39,16 +39,15 @@ func (p *ZeaburProjectDataSource) Schema(ctx context.Context, request datasource
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Required: true,
-
+				Computed:            true,
 				MarkdownDescription: "The ID of the project",
 			},
 			"name": schema.StringAttribute{
-				Computed:            true,
+				Required:            true,
 				MarkdownDescription: "The name of the project",
 			},
 			"owner": schema.StringAttribute{
-				Computed:            true,
+				Required:            true,
 				MarkdownDescription: "The owner of the project",
 			},
 			"region": schema.StringAttribute{
@@ -82,13 +81,13 @@ func (p *ZeaburProjectDataSource) Read(ctx context.Context, request datasource.R
 		return
 	}
 
-	project, err := p.client.GetProject(ctx, data.Id.ValueString())
+	project, err := p.client.GetProject(ctx, "", data.Owner.ValueString(), data.Name.ValueString())
 	if err != nil {
 		response.Diagnostics.AddError("failed to get project", err.Error())
 		return
 	}
 
-	data.Name = types.StringValue(project.Name)
+	data.Id = types.StringValue(project.ID)
 
 	tflog.Trace(ctx, "Read project", map[string]interface{}{
 		"id":    data.Id,

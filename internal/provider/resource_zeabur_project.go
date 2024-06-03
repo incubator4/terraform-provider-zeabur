@@ -113,7 +113,7 @@ func (p *ZeaburProjectResource) Read(ctx context.Context, request resource.ReadR
 	}
 
 	// Get refreshed project details
-	project, err := p.client.GetProject(ctx, state.ID.ValueString())
+	project, err := p.client.GetProject(ctx, state.ID.ValueString(), "", "")
 	if err != nil {
 		response.Diagnostics.AddError("Error getting project", err.Error())
 		return

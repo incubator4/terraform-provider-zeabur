@@ -83,7 +83,7 @@ func (p *ZeaburProvider) Configure(ctx context.Context, req provider.ConfigureRe
 
 	// Example client configuration for data sources and resources
 	tflog.Info(ctx, "Configuring Zeabur client")
-	client := api.NewClient(apiToken)
+	client := api.New(apiToken)
 	resp.DataSourceData = client
 	resp.ResourceData = client
 }
@@ -96,7 +96,9 @@ func (p *ZeaburProvider) Resources(ctx context.Context) []func() resource.Resour
 
 func (p *ZeaburProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
+		NewZeaburUserDataSource,
 		NewZeaburProjectDataSource,
+		NewZeaburServiceDataSource,
 	}
 }
 

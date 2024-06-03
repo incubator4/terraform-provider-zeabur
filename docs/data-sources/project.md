@@ -23,10 +23,10 @@ data "zeabur_project" "example" {
 
 ### Required
 
-- `id` (String) The ID of the project
+- `name` (String) The name of the project
+- `owner` (String) The owner of the project
 
 ### Read-Only
 
-- `name` (String) The name of the project
-- `owner` (String) The owner of the project
+- `id` (String) The ID of the project
 - `region` (String) The region of the project
